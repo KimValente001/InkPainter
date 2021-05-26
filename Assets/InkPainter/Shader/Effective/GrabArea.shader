@@ -1,4 +1,6 @@
-﻿Shader "Es/Effective/GrabArea"{
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Es/Effective/GrabArea"{
 	Properties{
 		[HideInInspector]
 		_ClipTex("Clipping Texture", 2D) = "white"
@@ -48,7 +50,7 @@
 
 			v2f vert(app_data i) {
 				v2f o;
-				o.screen = mul(UNITY_MATRIX_MVP, i.vertex);
+				o.screen = UnityObjectToClipPos(i.vertex);
 				o.uv = i.uv;
 				return o;
 			}
