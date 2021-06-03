@@ -21,6 +21,8 @@ namespace Es.InkPainter.Sample
 
 		public Transform tip;
 
+		public float maxDistance;
+
 		[SerializeField]
 		private Brush brush;
 
@@ -30,14 +32,17 @@ namespace Es.InkPainter.Sample
 		[SerializeField]
 		bool erase = false;
 
+		//public void OnCollisionEnter(Collision collision)
 		private void Update()
 		{
-			if (Input./*GetMouseButton(0)*/GetButton("XRI_Right_TriggerButton"))
-			{
+
+			//if (collision.gameObject.tag == "Planel") 
+			//if (Input./*GetMouseButton(0)*/GetButton("XRI_Right_TriggerButton"))
+			//{
 				// var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				bool success = true;
 				RaycastHit hitInfo;
-				if (Physics.Raycast(/*ray, out hitInfo*/tip.position, tip.forward, out hitInfo, 1000))
+				if (Physics.Raycast(/*ray, out hitInfo*/tip.position, tip.forward, out hitInfo, maxDistance))
 				{
 					var paintObject = hitInfo.transform.GetComponent<InkCanvas>();
 					if (paintObject != null)
@@ -64,7 +69,7 @@ namespace Es.InkPainter.Sample
 					if (!success)
 						Debug.LogError("Failed to paint.");
 				}
-			}
+			//}
 		}
 
 		public void OnGUI()
